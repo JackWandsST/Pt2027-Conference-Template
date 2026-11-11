@@ -199,6 +199,69 @@
 
   .leg { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
   .leg-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+/* ── CONFERENCE INFORMATION ───────────────────── */
+
+.info-toggle {
+  margin: 0 0 1.5rem;
+}
+
+.info-button {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.info-button:hover {
+  background: var(--blue-pale);
+  border-color: var(--navy);
+}
+
+.conference-info {
+  margin-bottom: 2rem;
+}
+
+.conference-info.hidden {
+  display: none;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 10px;
+}
+
+.info-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.info-card h4 {
+  margin-bottom: 6px;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.info-card a {
+  color: var(--navy);
+  font-weight: 600;
+}
 
   /* ── TABS ─────────────────────────────────────── */
   .tabs {
@@ -383,6 +446,46 @@
 <div class="leg"><div class="leg-dot" style="background:#948cd4"></div>Travel &amp; logistics</div>
 <div class="leg"><div class="leg-dot" style="background:#59a34a"></div>Social &amp; evening</div>
 <div class="leg"><div class="leg-dot" style="background:#c6c6c5"></div>Break</div>
+</div>
+<div class="info-toggle">
+    <button id="conferenceInfoBtn" class="info-button">
+        Conference Information
+    </button>
+</div>
+
+<div id="conferenceInfoPanel" class="conference-info hidden">
+    <div class="info-grid">
+
+        <div class="info-card">
+            <h4>📍 Venue</h4>
+            <p>University of Warwick</p>
+        </div>
+
+        <div class="info-card">
+            <h4>📶 WiFi</h4>
+            <p>Warwick Guest</p>
+        </div>
+
+        <div class="info-card">
+            <h4>📞 Need Help?</h4>
+            <p>Sutton Trust Team<br>07495 023259</p>
+        </div>
+
+        <div class="info-card">
+            <h4>⏰ Curfew</h4>
+            <p>Return to Jack Martin accommodation by 10:00pm.</p>
+        </div>
+
+        <div class="info-card">
+            <h4>📋 Welcome Pack</h4>
+            <p>
+                <a href="#" target="_blank">
+                    View full guidance →
+                </a>
+            </p>
+        </div>
+
+    </div>
 </div>
 <div class="tabs">
 <span class="tab active" onclick="show('d1',this)">Day 1</span>
@@ -651,6 +754,18 @@ function show(id, tab){
 }
 
 ['d1','d2','d3'].forEach(renderDay);
+const infoBtn = document.getElementById('conferenceInfoBtn');
+const infoPanel = document.getElementById('conferenceInfoPanel');
+
+infoBtn.addEventListener('click', () => {
+  infoPanel.classList.toggle('hidden');
+
+  infoBtn.textContent =
+    infoPanel.classList.contains('hidden')
+      ? 'Conference Information'
+      : 'Hide Conference Information';
+});
 </script>
 </body>
 </html>
+
